@@ -1848,6 +1848,84 @@ function resolveChatRunShutdownGraceMs() {
   return Math.max(0, Math.floor(raw));
 }
 
+const UI_TEST_HTML = `<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Design Daemon — UI Test</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #1a1a2e; color: #e0e0e0; font-family: system-ui, sans-serif; padding: 2rem; }
+    h1 { color: #a78bfa; margin-bottom: 1.5rem; font-size: 1.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+    .card { background: #16213e; border: 1px solid #0f3460; border-radius: 8px; padding: 1.25rem; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+    .card-title { font-weight: 600; font-size: 0.95rem; color: #c4b5fd; }
+    .badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 99px; }
+    .badge-ok { background: #064e3b; color: #34d399; }
+    .badge-err { background: #7f1d1d; color: #fca5a5; }
+    .badge-loading { background: #1e3a5f; color: #93c5fd; }
+    pre { font-size: 0.75rem; color: #94a3b8; overflow: auto; max-height: 200px; white-space: pre-wrap; word-break: break-all; }
+    button { margin-top: 1.5rem; padding: 0.5rem 1.5rem; background: #7c3aed; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+    button:hover { background: #6d28d9; }
+    .ts { font-size: 0.75rem; color: #64748b; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>🎨 Open Design Daemon — UI Test</h1>
+  <div class="grid" id="grid"></div>
+  <button onclick="runAll()">↺ Refresh</button>
+  <p class="ts" id="ts"></p>
+  <script>
+    const CHECKS = [
+      { id: 'version', label: '/api/version', url: '/api/version', method: 'GET' },
+      { id: 'projects', label: '/api/projects', url: '/api/projects', method: 'GET' },
+      { id: 'health', label: 'Health (via /api/version)', url: '/api/version', method: 'GET' },
+    ];
+    function card(c) {
+      return '<div class="card" id="card-' + c.id + '">' +
+        '<div class="card-header">' +
+        '<span class="card-title">' + c.label + '</span>' +
+        '<span class="badge badge-loading" id="badge-' + c.id + '">⏳ Loading</span>' +
+        '</div>' +
+        '<pre id="pre-' + c.id + '">…</pre>' +
+        '</div>';
+    }
+    async function runCheck(c) {
+      const badge = document.getElementById('badge-' + c.id);
+      const pre = document.getElementById('pre-' + c.id);
+      badge.className = 'badge badge-loading'; badge.textContent = '⏳ Loading';
+      pre.textContent = '…';
+      try {
+        const r = await fetch(c.url, { method: c.method });
+        const text = await r.text();
+        let pretty;
+        try { pretty = JSON.stringify(JSON.parse(text), null, 2); } catch { pretty = text; }
+        if (c.id === 'projects') {
+          try {
+            const arr = JSON.parse(text);
+            if (Array.isArray(arr)) pretty = JSON.stringify(arr.slice(0, 5), null, 2) + (arr.length > 5 ? '\\n… (' + arr.length + ' total)' : '');
+          } catch {}
+        }
+        pre.textContent = pretty;
+        badge.className = r.ok ? 'badge badge-ok' : 'badge badge-err';
+        badge.textContent = r.ok ? '✅ ' + r.status : '❌ ' + r.status;
+      } catch(e) {
+        pre.textContent = String(e);
+        badge.className = 'badge badge-err'; badge.textContent = '❌ Error';
+      }
+    }
+    function runAll() {
+      document.getElementById('ts').textContent = 'Last run: ' + new Date().toLocaleTimeString();
+      CHECKS.forEach(runCheck);
+    }
+    document.getElementById('grid').innerHTML = CHECKS.map(card).join('');
+    runAll();
+  </script>
+</body>
+</html>`;
+
 export async function startServer({
   port = 7456,
   host = process.env.OD_BIND_HOST || '127.0.0.1',
@@ -1974,6 +2052,11 @@ export async function startServer({
   app.get('/api/version', async (_req, res) => {
     const version = await readCurrentAppVersionInfo();
     res.json({ version });
+  });
+
+  app.get('/_test', (_req, res) => {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.send(UI_TEST_HTML);
   });
 
   registerConnectorRoutes(app, { sendApiError, authorizeToolRequest, projectsRoot: PROJECTS_DIR, requireLocalDaemonRequest });

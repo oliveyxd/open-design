@@ -6,5 +6,6 @@ export default defineConfig({
     include: ['tests/**/*.test.{ts,tsx,js,mjs,cjs}'],
     setupFiles: ['tests/setup.ts'],
     testTimeout: 20_000,
+    reporters: process.env.VITEST_UI ? ['verbose'] : ['default'],
   },
 });

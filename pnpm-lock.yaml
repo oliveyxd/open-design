@@ -75,12 +75,15 @@ importers:
       '@types/node':
         specifier: ^20.17.10
         version: 20.19.39
+      '@vitest/ui':
+        specifier: ^2.1.8
+        version: 2.1.9(vitest@2.1.9)
       typescript:
         specifier: ^5.6.3
         version: 5.9.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@20.19.39)(jsdom@29.1.1)
+        version: 2.1.9(@types/node@20.19.39)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
   apps/desktop:
     dependencies:
@@ -170,7 +173,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@24.12.2)(jsdom@29.1.1)
+        version: 2.1.9(@types/node@24.12.2)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
   apps/web:
     dependencies:
@@ -225,7 +228,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@20.19.39)(jsdom@29.1.0)
+        version: 2.1.9(@types/node@20.19.39)(@vitest/ui@2.1.9)(jsdom@29.1.0)
 
   e2e:
     devDependencies:
@@ -243,7 +246,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@20.19.39)(jsdom@29.1.1)
+        version: 2.1.9(@types/node@20.19.39)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
   packages/contracts:
     dependencies:
@@ -259,7 +262,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@24.12.2)(jsdom@29.1.1)
+        version: 2.1.9(@types/node@24.12.2)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
   packages/platform:
     devDependencies:
@@ -274,7 +277,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@24.12.2)(jsdom@29.1.1)
+        version: 2.1.9(@types/node@24.12.2)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
   packages/sidecar:
     devDependencies:
@@ -289,7 +292,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@24.12.2)(jsdom@29.1.1)
+        version: 2.1.9(@types/node@24.12.2)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
   packages/sidecar-proto:
     devDependencies:
@@ -304,7 +307,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@24.12.2)(jsdom@29.1.1)
+        version: 2.1.9(@types/node@24.12.2)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
   tools/dev:
     dependencies:
@@ -372,7 +375,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@types/node@24.12.2)(jsdom@29.1.1)
+        version: 2.1.9(@types/node@24.12.2)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
 packages:
 
@@ -1285,6 +1288,9 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  '@polka/url@1.0.0-next.29':
+    resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
+
   '@rollup/pluginutils@5.3.0':
     resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
     engines: {node: '>=14.0.0'}
@@ -1630,6 +1636,11 @@ packages:
 
   '@vitest/spy@2.1.9':
     resolution: {integrity: sha512-E1B35FwzXXTs9FHNK6bDszs7mtydNi5MIfUWpceJ8Xbfb1gBMscAnwLbEu+B44ed6W3XjL9/ehLPHR1fkf1KLQ==}
+
+  '@vitest/ui@2.1.9':
+    resolution: {integrity: sha512-izzd2zmnk8Nl5ECYkW27328RbQ1nKvkm6Bb5DAaz1Gk59EbLkiCMa6OLT0NoaAYTjOFS6N+SMYW1nh4/9ljPiw==}
+    peerDependencies:
+      vitest: 2.1.9
 
   '@vitest/utils@2.1.9':
     resolution: {integrity: sha512-v0psaMSkNJ3A2NMrUEHFRzJtDPFn+/VWZ5WxImB21T9fjucJRmS7xCS3ppEnARb9y11OAzaD+P2Ps+b+BGX5iQ==}
@@ -2470,6 +2481,9 @@ packages:
       picomatch:
         optional: true
 
+  fflate@0.8.2:
+    resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
+
   file-uri-to-path@1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
 
@@ -2483,6 +2497,9 @@ packages:
   finalhandler@2.1.1:
     resolution: {integrity: sha512-S8KoZgRZN+a5rNwqTxlZZePjT/4cnm0ROV70LedRHZ0p8u9fRID0hJUZQpkKLzro8LfmC8sx23bY6tVNxv8pQA==}
     engines: {node: '>= 18.0.0'}
+
+  flatted@3.4.2:
+    resolution: {integrity: sha512-PjDse7RzhcPkIJwy5t7KPWQSZ9cAbzQXcafsetQoD7sOJRQlGikNbx7yZp2OotDnJyrDcbyRq3Ttb18iYOqkxA==}
 
   flattie@1.1.1:
     resolution: {integrity: sha512-9UbaD6XdAL97+k/n+N7JwX46K/M6Zc6KcFYskrYL8wbBV/Uyk0CTAMY0VT+qiK5PM7AIc9aTWYtq65U7T+aCNQ==}
@@ -3753,6 +3770,10 @@ packages:
     resolution: {integrity: sha512-a2B9Y0KlNXl9u/vsW6sTIu9vGEpfKu2wRV6l1H3XEas/0gUIzGzBoP/IouTcUQbm9JWZLH3COxyn03TYlFax6w==}
     engines: {node: '>=10'}
 
+  sirv@3.0.2:
+    resolution: {integrity: sha512-2wcC/oGxHis/BoHkkPwldgiPSYcpZK3JU28WoMVv55yHJgcZ8rlXvuG9iZggz+sU1d4bRgIGASwyWqjxu3FM0g==}
+    engines: {node: '>=18'}
+
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
@@ -3936,6 +3957,10 @@ packages:
   toidentifier@1.0.1:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
+
+  totalist@3.0.1:
+    resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
+    engines: {node: '>=6'}
 
   tough-cookie@6.0.1:
     resolution: {integrity: sha512-LktZQb3IeoUWB9lqR5EWTHgW/VTITCXg4D21M+lvybRVdylLrRMnqaIONLVb5mav8vM19m44HIcGq4qASeu2Qw==}
@@ -5249,6 +5274,8 @@ snapshots:
     dependencies:
       playwright: 1.59.1
 
+  '@polka/url@1.0.0-next.29': {}
+
   '@rollup/pluginutils@5.3.0(rollup@4.60.2)':
     dependencies:
       '@types/estree': 1.0.8
@@ -5593,6 +5620,17 @@ snapshots:
   '@vitest/spy@2.1.9':
     dependencies:
       tinyspy: 3.0.2
+
+  '@vitest/ui@2.1.9(vitest@2.1.9)':
+    dependencies:
+      '@vitest/utils': 2.1.9
+      fflate: 0.8.2
+      flatted: 3.4.2
+      pathe: 1.1.2
+      sirv: 3.0.2
+      tinyglobby: 0.2.16
+      tinyrainbow: 1.2.0
+      vitest: 2.1.9(@types/node@20.19.39)(@vitest/ui@2.1.9)(jsdom@29.1.1)
 
   '@vitest/utils@2.1.9':
     dependencies:
@@ -6711,6 +6749,8 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.4
 
+  fflate@0.8.2: {}
+
   file-uri-to-path@1.0.0: {}
 
   filelist@1.0.6:
@@ -6739,6 +6779,8 @@ snapshots:
       statuses: 2.0.2
     transitivePeerDependencies:
       - supports-color
+
+  flatted@3.4.2: {}
 
   flattie@1.1.1: {}
 
@@ -8396,6 +8438,12 @@ snapshots:
     dependencies:
       semver: 7.7.4
 
+  sirv@3.0.2:
+    dependencies:
+      '@polka/url': 1.0.0-next.29
+      mrmime: 2.0.1
+      totalist: 3.0.1
+
   sisteransi@1.0.5: {}
 
   sitemap@9.0.1:
@@ -8574,6 +8622,8 @@ snapshots:
   tmp@0.2.5: {}
 
   toidentifier@1.0.1: {}
+
+  totalist@3.0.1: {}
 
   tough-cookie@6.0.1:
     dependencies:
@@ -8838,7 +8888,7 @@ snapshots:
     optionalDependencies:
       vite: 6.4.2(@types/node@20.19.39)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.4)
 
-  vitest@2.1.9(@types/node@20.19.39)(jsdom@29.1.0):
+  vitest@2.1.9(@types/node@20.19.39)(@vitest/ui@2.1.9)(jsdom@29.1.0):
     dependencies:
       '@vitest/expect': 2.1.9
       '@vitest/mocker': 2.1.9(vite@5.4.21(@types/node@20.19.39))
@@ -8862,6 +8912,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.19.39
+      '@vitest/ui': 2.1.9(vitest@2.1.9)
       jsdom: 29.1.0
     transitivePeerDependencies:
       - less
@@ -8874,7 +8925,7 @@ snapshots:
       - supports-color
       - terser
 
-  vitest@2.1.9(@types/node@20.19.39)(jsdom@29.1.1):
+  vitest@2.1.9(@types/node@20.19.39)(@vitest/ui@2.1.9)(jsdom@29.1.1):
     dependencies:
       '@vitest/expect': 2.1.9
       '@vitest/mocker': 2.1.9(vite@5.4.21(@types/node@20.19.39))
@@ -8898,6 +8949,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.19.39
+      '@vitest/ui': 2.1.9(vitest@2.1.9)
       jsdom: 29.1.1
     transitivePeerDependencies:
       - less
@@ -8910,7 +8962,7 @@ snapshots:
       - supports-color
       - terser
 
-  vitest@2.1.9(@types/node@24.12.2)(jsdom@29.1.1):
+  vitest@2.1.9(@types/node@24.12.2)(@vitest/ui@2.1.9)(jsdom@29.1.1):
     dependencies:
       '@vitest/expect': 2.1.9
       '@vitest/mocker': 2.1.9(vite@5.4.21(@types/node@24.12.2))
@@ -8934,6 +8986,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.12.2
+      '@vitest/ui': 2.1.9(vitest@2.1.9)
       jsdom: 29.1.1
     transitivePeerDependencies:
       - less

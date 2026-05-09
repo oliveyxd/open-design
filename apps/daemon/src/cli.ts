@@ -222,14 +222,13 @@ function runToolSubcommand(
   fn: (args: string[]) => Promise<{ exitCode: number }>,
   args: string[],
 ): void {
-  void name;
   fn(args)
     .then(({ exitCode }) => {
       process.exitCode = exitCode;
     })
     .catch((error: unknown) => {
       const message = error instanceof Error ? error.message : String(error);
-      process.stderr.write(`${JSON.stringify({ ok: false, error: { message } })}\n`);
+      process.stderr.write(`${JSON.stringify({ ok: false, command: name, error: { message } })}\n`);
       process.exitCode = 1;
     });
 }
